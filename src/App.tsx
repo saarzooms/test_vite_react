@@ -4,15 +4,17 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Button from './components/Button'
 import List from './components/List'
+import Table from './components/Table'
 
 function App() {
-  const items = ['Rajkot','Jamnagar','Surat',"Amreli"]
-  const fruits = ['Apple','Banana','Grapes']
-  // return <Button text="MyButton" color="primary"/>
-  return <><List items={items} title="Cities"/>
-   <hr/>
-   <List items={fruits} title="Fruits"/>
-   </>
+  // const items = ['Rajkot','Jamnagar','Surat',"Amreli"]
+  // const fruits = ['Apple','Banana','Grapes']
+  // // return <Button text="MyButton" color="primary"/>
+  // return <><List items={items} title="Cities"/>
+  //  <hr/>
+  //  <List items={fruits} title="Fruits"/>
+  //  </>
+  return <Table/>
 }
 
 export default App
