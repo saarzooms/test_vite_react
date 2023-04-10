@@ -5,12 +5,38 @@ const Table = () => {
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [phone,setPhone] = useState('')
+    const [isEditing,setEditing] = useState(false)
+    const [editIndex,setEditIndex] = useState(-1)
 function handleSubmit(event:FormEvent){
     event.preventDefault();
-    setData([...data,{name, email, phone}])
+    if(isEditing){
+        const newData = [...data];
+        newData[editIndex] = {name, email, phone}
+        setData(newData)
+        setEditIndex(-1)
+        setEditing(false)
+    }else{
+        setData([...data,{name, email, phone}])
+    }
+    
     setName('')
     setEmail('')
     setPhone('')
+}
+function handleEdit(index:number){
+    console.log('from edit ',index);
+    setName(data[index].name)
+    setEmail(data[index].email)
+    setPhone(data[index].phone)
+    setEditIndex(index)
+    setEditing(true)
+}
+function handleDelete(index:number){
+    console.log('from delete',index);
+    const newData = [...data];
+    newData.splice(index,1);
+    setData(newData);
+    
 }
   return (
     <div>
@@ -59,6 +85,7 @@ function handleSubmit(event:FormEvent){
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,6 +93,14 @@ function handleSubmit(event:FormEvent){
                         <td>{row.name}</td>
                         <td>{row.email}</td>
                         <td>{row.phone}</td>
+                        <td>
+                        <button type="button" className="btn btn-primary mb-3" onClick={()=>handleEdit(index)}>
+              Edit
+            </button>   <button type="button" className="btn btn-danger mb-3" onClick={()=>handleDelete(index)}>
+              Delete
+            </button>
+                        </td>
+                        
                     </tr>)
                    
                 )}
